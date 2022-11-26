@@ -24,29 +24,22 @@ public class SpringSecurityConfiguration {
                 .authorizeHttpRequests((authz) -> authz
                         .antMatchers("/h2-console/**").permitAll()
                         //.anyRequest().authenticated()
-                        .antMatchers("/main").authenticated()
+                        .antMatchers("/admin/**").authenticated()
                 )
-                .csrf().ignoringAntMatchers("/h2-console/**")
-                .and()
-                .headers().frameOptions().disable()
-                .and()
+                .csrf().ignoringAntMatchers("/h2-console/**").and()
+                .headers().frameOptions().disable().and()
+
+                .logout().logoutUrl("/logout").and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
+
                 .failureHandler(
-                    new AuthenticationFailureHandler() {
-                        @Override
-                        public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-                                        AuthenticationException exception) throws IOException, ServletException {
-                            System.out.println("exception!! : " + exception.getMessage());
-                            response.sendRedirect("/login");
-                        }
+                    (request, response, exception) -> {
+                        System.out.println("exception!! : " + exception.getMessage());
+                        response.sendRedirect("/login");
                     }
                 )
-
-                //.and()
-                //.csrf().disable()
-
         ;
         return http.build();
     }
