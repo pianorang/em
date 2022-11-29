@@ -2,6 +2,7 @@ package me.pianorang.em.admin.common;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.annotation.*;
 
@@ -9,6 +10,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @RequestMapping("/admin/api")
-@Controller
+@RestController
 public @interface AdminRestController {
 }
