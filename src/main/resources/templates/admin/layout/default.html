@@ -10,7 +10,7 @@
         data-template="vertical-menu-template-free"
 >
 <head>
-    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_token" name="_csrf_token" th:content="${_csrf.token}"/>
     <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta charset="utf-8" />
     <meta
@@ -60,18 +60,32 @@
     <script src="/assets/vendor/js/bootstrap.js"></script>
     <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="/assets/vendor/js/menu.js"></script>
+
     <!-- endbuild -->
 
     <!-- Vendors JS -->
 
-    <!-- Main JS -->
-    <script src="/assets/js/main.js"></script>
+
 
     <!-- Page JS -->
 
+
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <!-- Datatables.net -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-colvis-2.3.3/b-html5-2.3.3/b-print-2.3.3/sl-1.5.0/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-colvis-2.3.3/b-html5-2.3.3/b-print-2.3.3/sl-1.5.0/datatables.min.js"></script>
+
+    <script>
+        $.ajaxSetup({
+          beforeSend: function(jqXHR, settigns){
+            jqXHR.setRequestHeader($('#_csrf_header').attr('content'), $('#_csrf_token').attr('content'));
+          }
+        });
+    </script>
 </head>
 
 <body>
@@ -103,7 +117,8 @@
 </div>
 <!-- / Layout wrapper -->
 
-
-
+<script src="/assets/vendor/js/menu.js"></script>
+<!-- Main JS -->
+<script src="/assets/js/main.js"></script>
 </body>
 </html>

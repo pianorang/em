@@ -1,5 +1,6 @@
 package me.pianorang.em.core.event.application;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class EventCommand {
     private Long id;
+    @NotNull
     private String title;
     private String description;
     private LocalDateTime startDate;

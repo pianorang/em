@@ -6,13 +6,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 class EventCrudService implements EventCrudPort {
-
+    private final EventRepository eventRepository;
     public EventCrudService(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
     }
-
-    private final EventRepository eventRepository;
-
     @Override
     public Event save(EventCommand command) {
         return eventRepository.save(command.mapToEntity());

@@ -26,8 +26,6 @@ public class EventJqueryDataTablesService implements LoadJqueryDataTablesPort {
     @Override
     public JqueryDataTablesResponse loadDataTables(JqueryDataTablesRequest request) {
         Page<Event> eventPage = eventRepository.findAll(request.getPageable());
-
-        log.debug("!! {}", eventPage);
         return new JqueryDataTablesResponse(
                     request.getDraw(),
                     eventPage.getTotalElements(),
