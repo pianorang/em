@@ -106,6 +106,19 @@ const table = $('#dataTable').DataTable({
                 clearPopupData();
                 $eventModal.modal('show');
             }
+        },
+        {
+        extend: 'selected',
+            text: '삭제',
+            className: 'btn-danger',
+            action: function ( e, dt, node, config ) {
+                if(confirm('삭제 하시겠습니까?')){
+                    const rowId = dt.rows( { selected: true } ).data()[0].id;
+                    $.get('/admin/api/event/delete/' + rowId, function(){
+                        dt.ajax.reload();
+                    });
+                }
+            }
         }
     ],
     select: {
@@ -171,10 +184,12 @@ const clearPopupData =_=> table.settings().init().columns.forEach(col=> $('#' + 
 // Event Listener
 $('#btnSave').click(function(){
     const param = $('#modalForm').serialize();
-    $.post('/admin/api/event/new', param, _=> {
+    console.log(param);
+    const url = param.eventId != '' ? '/admin/api/event/update/' + param.eventId : '/admin/api/event/new';
+
+    $.put(url, param, _=> {
         $eventModal.modal('hide');
         table.ajax.reload();
-
     });
 });
 

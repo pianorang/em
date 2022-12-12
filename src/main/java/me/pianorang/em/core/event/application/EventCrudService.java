@@ -14,4 +14,15 @@ class EventCrudService implements EventCrudPort {
     public Event save(EventCommand command) {
         return eventRepository.save(command.mapToEntity());
     }
+
+    @Override
+    public Event update(EventCommand command) {
+        return eventRepository.findById(command.getId()).orElseThrow();
+    }
+    @Override
+    public void delete(Long id) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow();
+        eventRepository.delete(event);
+    }
 }

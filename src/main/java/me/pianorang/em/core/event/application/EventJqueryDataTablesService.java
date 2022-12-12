@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class EventJqueryDataTablesService implements LoadJqueryDataTablesPort {
+class EventJqueryDataTablesService implements LoadJqueryDataTablesPort {
 
     private final EventRepository eventRepository;
 
