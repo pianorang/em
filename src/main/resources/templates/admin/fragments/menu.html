@@ -84,18 +84,18 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Pages</span>
         </li>
-        <li class="menu-item" th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/admin/event') ? 'active open' : '' }">
+        <li class="menu-item" th:classappend="${#strings.startsWith(requestUrl, '/admin/event') ? 'active open' : '' }">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div data-i18n="Account Settings">이벤트 관리</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item" th:classappend="${#httpServletRequest.requestURI.equals('/admin/event') ? 'active' : '' }">
+                <li class="menu-item" th:classappend="${requestUrl.equals('/admin/event') ? 'active' : '' }">
                     <a href="/admin/event" class="menu-link">
                         <div data-i18n="Account">이벤트</div>
                     </a>
                 </li>
-                <li class="menu-item" th:classappend="${#httpServletRequest.requestURI.equals('/admin/event/participants') ? 'active' : '' }">
+                <li class="menu-item" th:classappend="${requestUrl.equals('/admin/event/participants') ? 'active' : '' }">
                     <a href="/admin/event/participants" class="menu-link">
                         <div data-i18n="Notifications">이벤트 참여자</div>
                     </a>

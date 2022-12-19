@@ -1,5 +1,6 @@
 package me.pianorang.em.data;
 
+import me.pianorang.em.core.user.application.UserCommand;
 import me.pianorang.em.core.user.application.UserRegistrationPort;
 import me.pianorang.em.core.user.domain.User;
 import me.pianorang.em.core.user.domain.UserRepository;
@@ -20,8 +21,8 @@ public class UserDataInitializer implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        userRegistrationPort.join("전성한", "jsh", "wjstjdgks");
-        userRegistrationPort.join("전이루", "jyr", "wjstjdgks");
-        userRegistrationPort.join("전리라", "jrr", "wjstjdgks");
+        userRegistrationPort.join(new UserCommand("전성한", "jsh", "wjstjdgks", "jsh@test.com"));
+        userRegistrationPort.join(new UserCommand("전이루", "jyr", "wjstjdgks", "jyr@test.com"));
+        userRegistrationPort.join(new UserCommand("전리라", "jrr", "wjstjdgks", "jrr@test.com"));
     }
 }

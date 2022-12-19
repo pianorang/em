@@ -13,13 +13,15 @@ public class JqueryDataTablesRequest {
     private Sort.Direction sortDirection;
     private String sortColumn;
     private Pageable pageable;
+    private String searchText;
 
-    public JqueryDataTablesRequest(int draw, int page, int length, Sort.Direction sortDirection, String sortColumn) {
+    public JqueryDataTablesRequest(int draw, int page, int length, Sort.Direction sortDirection, String sortColumn, String searchText) {
         this.draw = draw;
         this.page = page;
         this.length = length;
         this.sortDirection = sortDirection == null ? Sort.Direction.DESC : sortDirection;
         this.sortColumn = sortColumn == null ? "id" : sortColumn;
+        this.searchText = searchText;
         this.pageable = PageRequest.of(page, length, this.sortDirection, this.sortColumn);
     }
 }

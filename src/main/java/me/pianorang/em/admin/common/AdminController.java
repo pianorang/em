@@ -12,3 +12,4 @@ import java.lang.annotation.*;
 @Controller
 public @interface AdminController {
 }
+

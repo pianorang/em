@@ -11,6 +11,4 @@ import org.springframework.stereotype.Repository;
 //@Profile(Constant.PROFILE_PRODUCTION)
 @Repository
 public interface JpaUserRepository extends UserRepository, JpaRepository<User, Long> {
-
-
 }

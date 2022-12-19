@@ -101,7 +101,7 @@ const table = $('#dataTable').DataTable({
     buttons: [
         {
             text: '추가',
-            className: '',
+            className: 'btn-primary',
             action: function ( e, dt, node, config ) {
                 clearPopupData();
                 $eventModal.modal('show');
@@ -137,7 +137,10 @@ const table = $('#dataTable').DataTable({
           return {
             draw: d.draw,
             page: info.page,
-            length: info.length
+            length: info.length,
+            sortColumn:  d.columns[d.order[0].column].data,
+            sortDirection: d.order[0].dir.toUpperCase(),
+            search: d.search.value,
           }
         },
         "dataSrc": function(d){
@@ -158,7 +161,7 @@ const table = $('#dataTable').DataTable({
         {"name": "eventId", "data": "id", visible: false },
         {
             "name": "rowId",
-            "data": "rowId",
+            "data": "id",
             "render": function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
             }

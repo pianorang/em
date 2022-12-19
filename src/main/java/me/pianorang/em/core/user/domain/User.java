@@ -3,7 +3,7 @@ package me.pianorang.em.core.user.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -13,10 +13,11 @@ public class User {
 
     private User() {
     }
-    private User(String userName, String userAccount, String userPassword) {
+    private User(String userName, String userAccount, String userPassword, String email) {
         this.userName = userName;
         this.userAccount = userAccount;
         this.userPassword = userPassword;
+        this.email = email;
     }
 
     @Id
@@ -26,6 +27,7 @@ public class User {
     private String userName;
     private String userAccount;
     private String userPassword;
+    private String email;
 
     public Long getId() {
         return id;
@@ -43,7 +45,7 @@ public class User {
         return userPassword;
     }
 
-    public static User create(String userName, String userAccount, String userPassword){
-        return new User(userName, userAccount, userPassword);
+    public static User create(String userName, String userAccount, String userPassword, String email){
+        return new User(userName, userAccount, userPassword, email);
     }
 }

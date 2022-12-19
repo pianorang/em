@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AdminEventController {
     @GetMapping("/event")
     public String list(Model model){
-
         return "admin/event/event_list";
     }
 

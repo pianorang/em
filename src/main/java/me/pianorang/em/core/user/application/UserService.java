@@ -14,11 +14,9 @@ public class UserService implements UserRegistrationPort {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
-
-
-
     @Override
-    public User join(String userName, String userAccount, String userPassword) {
-        return userRepository.save(User.create(userName, userAccount, passwordEncoder.encode(userPassword)));
+    public User join(UserCommand user) {
+        user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
+        return userRepository.save(user.mapToEntity());
     }
 }

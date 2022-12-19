@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{admin/layout/default}"
+>
+<head>
+
+</head>
+
+<body>
+<div class="content-wrapper" layout:fragment="content">
+  <!-- Content -->
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive text-nowrap">
+          <table id="dataTable" class="display table compact cell-border" style="width:100%">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>번호</th>
+              <th>아이디</th>
+              <th>이름</th>
+              <th>이메일</th>
+            </tr>
+            </thead>
+          </table>
+
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+  <!-- / Content -->
+
+  <!-- Footer -->
+  <div th:insert="~{admin/fragments/footer :: footer}"></div>
+  <!-- / Footer -->
+
+  <div class="content-backdrop fade"></div>
+
+  <script>
+
+const table = $('#dataTable').DataTable({
+    dom: 'Bfrtip',
+    buttons: [
+        {
+            text: '추가',
+            className: 'btn-primary',
+            action: function ( e, dt, node, config ) {
+                clearPopupData();
+                $eventModal.modal('show');
+            }
+        },
+        {
+        extend: 'selected',
+            text: '삭제',
+            className: 'btn-danger',
+            action: function ( e, dt, node, config ) {
+                if(confirm('삭제 하시겠습니까?')){
+                    const rowId = dt.rows( { selected: true } ).data()[0].id;
+                    $.get('/admin/api/event/delete/' + rowId, function(){
+                        dt.ajax.reload();
+                    });
+                }
+            }
+        }
+    ],
+    select: {
+        style:    'single',
+        //selector: 'td:first-child'
+    },
+    "processing": true,
+    "serverSide": true,
+    "info": true,
+    "stateSave": true,
+    "rowId": 'id',
+    "ajax":{
+        url: "/admin/api/event/getList",
+        "data": function ( d ) {
+          var info = $('#dataTable').DataTable().page.info();
+          return {
+            draw: d.draw,
+            page: info.page,
+            length: info.length,
+            sortColumn:  d.columns[d.order[0].column].data,
+            sortDirection: d.order[0].dir.toUpperCase(),
+            search: d.search.value,
+          }
+        },
+        "dataSrc": function(d){
+            return d.data;
+        }
+
+
+    },
+    columnDefs: [
+        {
+            "targets": [1, 2],
+            "render": function ( data, type, row, meta ) {
+                return '<a href="javascript:editPopup('+ row.id + ')">' + data + '</a>';
+            },
+        }
+    ],
+    "columns" : [
+        {"name": "eventId", "data": "id", visible: false },
+        {
+            "name": "rowId",
+            "data": "id",
+            "render": function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }
+        },
+        {"name": "title", "data": "title"},
+        {"name": "description", "data": "description"},
+        {"name": "startDate", "data": "startDate"},
+        {"name": "endDate", "data": "endDate"},
+        {"name": "closed", "data": "closed"}
+    ]
+});
+
+//Functions
+
+
+// Event Listener
+
+
+
+</script>
+</div>
+
+</body>
+</html>
