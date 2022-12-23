@@ -7,11 +7,26 @@ import me.pianorang.em.core.user.domain.User;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserCommand {
+    private Long userId;
     private String userName;
     private String userAccount;
     private String userPassword;
     private String email;
 
+    public UserCommand(String userName, String userAccount, String userPassword, String email) {
+        this.userName = userName;
+        this.userAccount = userAccount;
+        this.userPassword = userPassword;
+        this.email = email;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
     public String getUserName() {
         return userName;
     }

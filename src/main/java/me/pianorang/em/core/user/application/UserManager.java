@@ -1,22 +1,33 @@
 package me.pianorang.em.core.user.application;
 
-import me.pianorang.em.core.user.domain.User;
+import jakarta.transaction.Transactional;
 import me.pianorang.em.core.user.domain.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService implements UserRegistrationUseCase {
+@Transactional
+public class UserManager implements UserEditor {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserManager(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
+
     @Override
-    public User join(UserCommand user) {
-        user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
-        return userRepository.save(user.mapToEntity());
+    public void create(UserCommand user) {
+        userRepository.save(user.mapToEntity());
+    }
+
+    @Override
+    public void update(UserCommand user) {
+
+    }
+
+    @Override
+    public void delete(Long id) {
+
     }
 }

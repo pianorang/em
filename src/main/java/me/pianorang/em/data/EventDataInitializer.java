@@ -2,7 +2,6 @@ package me.pianorang.em.data;
 
 import me.pianorang.em.core.event.application.EventCommand;
 import me.pianorang.em.core.event.application.EventCrudPort;
-import me.pianorang.em.core.user.application.UserRegistrationPort;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;

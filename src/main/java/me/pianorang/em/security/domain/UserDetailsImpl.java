@@ -22,7 +22,7 @@ public class UserDetailsImpl implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        if(user.getUserAccount().equals("admin")) {
+        if(user.getUserAccount().equals("jsh") || user.getUserAccount().equals("admin") ) {
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
         else {
